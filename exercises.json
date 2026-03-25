@@ -1,0 +1,26 @@
+[
+  {
+    "ExerciseName": "bench-press.jpg",
+    "ExerciseImageFileName": "Wyciskanie le\u017C\u0105c"
+  },
+  {
+    "ExerciseName": "bent-over-row.jpg",
+    "ExerciseImageFileName": "Wios\u0142owanie w opadzie"
+  },
+  {
+    "ExerciseName": "deadlift.jpg",
+    "ExerciseImageFileName": "Martwy ci\u0105g"
+  },
+  {
+    "ExerciseName": "pull-ups.jpg",
+    "ExerciseImageFileName": "Podci\u0105ganie na dr\u0105\u017Cku"
+  },
+  {
+    "ExerciseName": "push-ups.jpg",
+    "ExerciseImageFileName": "Pompki"
+  },
+  {
+    "ExerciseName": "squats.jpg",
+    "ExerciseImageFileName": "Przysiady"
+  }
+]
