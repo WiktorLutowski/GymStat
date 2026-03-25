@@ -40,10 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="exercises.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
