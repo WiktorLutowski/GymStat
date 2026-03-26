@@ -36,10 +36,10 @@ namespace GymStat.ViewModels
             EditExerciseCommand = new RelayCommand(EditExercise);
             AddExerciseCommand = new RelayCommand(AddExercise);
 
-            _ = InitializeExercisesAsync();
+            _ = InitializeExerciseResultsAsync();
         }
 
-        private async Task InitializeExercisesAsync()
+        private async Task InitializeExerciseResultsAsync()
         {
             allExerciseResults = await exerciseResultsService.LoadAllResultsAsync();
 
