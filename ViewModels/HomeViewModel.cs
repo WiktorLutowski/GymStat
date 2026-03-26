@@ -12,6 +12,9 @@ namespace GymStat.ViewModels
 
         public RelayCommand NextDateCommand { get; set; }
         public RelayCommand PreviousDateCommand { get; set; }
+        public RelayCommand RemoveExerciseCommand { get; set; }
+        public RelayCommand EditExerciseCommand { get; set; }
+        public RelayCommand AddExerciseCommand { get; set; }
 
         private readonly ExerciseResultsService exerciseResultsService;
         private List<ExerciseResult> allExerciseResults;
@@ -39,6 +42,11 @@ namespace GymStat.ViewModels
                 OnPropertyChanged(nameof(CurrentSelectedDate));
             });
 
+            RemoveExerciseCommand = new RelayCommand(RemoveExercise);
+            EditExerciseCommand = new RelayCommand(EditExercise);
+            AddExerciseCommand = new RelayCommand(AddExercise);
+
+
             _ = InitializeExercisesAsync();
         }
 
@@ -56,7 +64,24 @@ namespace GymStat.ViewModels
         {
             allExerciseResults = await exerciseResultsService.LoadAllResultsAsync();
 
+            allExerciseResults.Add(new(new("bench press", "bench-press.jpg"), DateOnly.FromDateTime(DateTime.Now)));
+
             ReloadResults();
+        }
+
+        private void EditExercise(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AddExercise(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RemoveExercise(object? obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }
