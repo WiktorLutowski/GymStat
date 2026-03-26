@@ -2,6 +2,7 @@
 using GymStat.Models;
 using GymStat.Services;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace GymStat.ViewModels
 {
@@ -44,10 +45,10 @@ namespace GymStat.ViewModels
 
             allExerciseResults.Add(new(new("bench press", "bench-press.jpg"), DateOnly.FromDateTime(DateTime.Now)));
 
-            ReloadResults();
+            RefreshResults();
         }
 
-        private void ReloadResults()
+        private void RefreshResults()
         {
             ResultsFromSelectedDate.Clear();
 
@@ -60,7 +61,7 @@ namespace GymStat.ViewModels
         private void ChangeDateByDays(int days)
         {
             CurrentSelectedDate = CurrentSelectedDate.AddDays(days);
-            ReloadResults();
+            RefreshResults();
             OnPropertyChanged(nameof(CurrentSelectedDate));
         }
 
@@ -74,9 +75,21 @@ namespace GymStat.ViewModels
             throw new NotImplementedException();
         }
 
-        private void RemoveExercise(object? obj)
+        private async void RemoveExercise(object? obj)
         {
-            throw new NotImplementedException();
+            if(obj is Exercise exercise)
+            {
+                MessageBoxResult result = MessageBox.Show($"Czy napewno chcesz usunąc ćwiczenie: {exercise.ExerciseName}?", "Uwaga", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result != MessageBoxResult.Yes)
+                    return;
+
+                allExerciseResults.RemoveAll(r => r.Exercise == exercise && r.Date == CurrentSelectedDate);
+
+                await exerciseResultsService.SaveAllResultsAsync(allExerciseResults);
+
+                RefreshResults();
+            }
         }
     }
 }
