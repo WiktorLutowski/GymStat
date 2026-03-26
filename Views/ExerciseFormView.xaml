@@ -101,7 +101,9 @@
                             Margin="5,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
+                            DataObject.Pasting="TextBox_Pasting"
                             FontSize="15"
+                            PreviewTextInput="NumberValidationTextBox"
                             Text="{Binding Weight}" />
                         <TextBlock VerticalAlignment="Center" Text="kg" />
 
@@ -110,7 +112,9 @@
                             Margin="15,0,5,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
+                            DataObject.Pasting="TextBox_Pasting"
                             FontSize="15"
+                            PreviewTextInput="NumberValidationTextBox"
                             Text="{Binding Repetitions}" />
                         <TextBlock
                             VerticalAlignment="Center"
