@@ -6,3 +6,6 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Style", "IDE0305:Simplify collection initialization", Justification = "<Pending>", Scope = "member", Target = "~M:GymStat.ViewModels.HomeViewModel.RefreshResults")]
+[assembly: SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>", Scope = "member", Target = "~M:GymStat.Services.ExercisesService.LoadAllExercisesAsync~System.Threading.Tasks.Task{System.Collections.Generic.List{GymStat.Models.Exercise}}")]
+[assembly: SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>", Scope = "member", Target = "~M:GymStat.Services.ExercisesService.SaveAllExercisesAsync(System.Collections.Generic.List{GymStat.Models.Exercise})~System.Threading.Tasks.Task")]
+[assembly: SuppressMessage("Style", "IDE0305:Simplify collection initialization", Justification = "<Pending>", Scope = "member", Target = "~M:GymStat.ViewModels.ExerciseFormViewModel.AddResult(System.Object)")]

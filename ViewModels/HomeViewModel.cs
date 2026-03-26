@@ -1,6 +1,7 @@
 ﻿using GymStat.Commands;
 using GymStat.Models;
 using GymStat.Services;
+using GymStat.Stores;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -18,11 +19,13 @@ namespace GymStat.ViewModels
         public RelayCommand AddExerciseCommand { get; set; }
 
         private readonly ExerciseResultsService exerciseResultsService;
+        private readonly NavigationStore navigationStore;
         private List<ExerciseResult> allExerciseResults;
 
-        public HomeViewModel()
+        public HomeViewModel(NavigationStore navigationStore)
         {
             exerciseResultsService = new ExerciseResultsService();
+            this.navigationStore = navigationStore;
             allExerciseResults = [];
 
             CurrentSelectedDate = DateOnly.FromDateTime(DateTime.Now);
@@ -39,11 +42,11 @@ namespace GymStat.ViewModels
             _ = InitializeExerciseResultsAsync();
         }
 
+        public HomeViewModel(NavigationStore navigationStore, DateOnly date) : this(navigationStore) => CurrentSelectedDate = date;
+
         private async Task InitializeExerciseResultsAsync()
         {
             allExerciseResults = await exerciseResultsService.LoadAllResultsAsync();
-
-            allExerciseResults.Add(new(new("bench press", "bench-press.jpg"), DateOnly.FromDateTime(DateTime.Now)));
 
             RefreshResults();
         }
@@ -67,24 +70,25 @@ namespace GymStat.ViewModels
 
         private void EditExercise(object? obj)
         {
-            throw new NotImplementedException();
+            if (obj is ExerciseResult result)
+                navigationStore.CurrentViewModel = new ExerciseFormViewModel(navigationStore, result);
         }
 
         private void AddExercise(object? obj)
         {
-            throw new NotImplementedException();
+            navigationStore.CurrentViewModel = new ExerciseFormViewModel(navigationStore, CurrentSelectedDate);
         }
 
         private async void RemoveExercise(object? obj)
         {
-            if(obj is Exercise exercise)
+            if(obj is ExerciseResult exerciseResult)
             {
-                MessageBoxResult result = MessageBox.Show($"Czy napewno chcesz usunąc ćwiczenie: {exercise.ExerciseName}?", "Uwaga", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show($"Czy napewno chcesz usunąc ćwiczenie: {exerciseResult.Exercise.ExerciseName}?", "Uwaga", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (result != MessageBoxResult.Yes)
                     return;
 
-                allExerciseResults.RemoveAll(r => r.Exercise == exercise && r.Date == CurrentSelectedDate);
+                allExerciseResults.RemoveAll(r => r.Id == exerciseResult.Id);
 
                 await exerciseResultsService.SaveAllResultsAsync(allExerciseResults);
 

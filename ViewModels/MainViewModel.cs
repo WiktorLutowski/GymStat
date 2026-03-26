@@ -1,5 +1,4 @@
 ﻿using GymStat.Stores;
-using System.ComponentModel;
 
 namespace GymStat.ViewModels
 {

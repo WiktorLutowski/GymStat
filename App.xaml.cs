@@ -15,10 +15,8 @@ namespace GymStat
 
         public App()
         {
-            navigationStore = new NavigationStore
-            {
-                CurrentViewModel = new HomeViewModel()
-            };
+            navigationStore = new NavigationStore();
+            navigationStore.CurrentViewModel = new HomeViewModel(navigationStore);
 
             mainViewModel = new(navigationStore);
         }

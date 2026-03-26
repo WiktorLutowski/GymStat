@@ -7,11 +7,10 @@ namespace GymStat.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (targetType == typeof(string))
-            {
-                if (value is int index)
-                    return index + 1;
-            }
+
+            if (value is int index)
+                return index + 1;
+
 
             // Throw an exception if the target type is not string or the value is not DateOnly
             throw new NotImplementedException();
