@@ -28,36 +28,14 @@ namespace GymStat.ViewModels
 
             ResultsFromSelectedDate = [];
 
-            NextDateCommand = new RelayCommand((x) =>
-            {
-                CurrentSelectedDate = CurrentSelectedDate.AddDays(1);
-                ReloadResults();
-                OnPropertyChanged(nameof(CurrentSelectedDate));
-            });
-
-            PreviousDateCommand = new RelayCommand((x) =>
-            {
-                CurrentSelectedDate = CurrentSelectedDate.AddDays(-1);
-                ReloadResults();
-                OnPropertyChanged(nameof(CurrentSelectedDate));
-            });
+            NextDateCommand = new RelayCommand(x => ChangeDateByDays(1));
+            PreviousDateCommand = new RelayCommand(x => ChangeDateByDays(-1));
 
             RemoveExerciseCommand = new RelayCommand(RemoveExercise);
             EditExerciseCommand = new RelayCommand(EditExercise);
             AddExerciseCommand = new RelayCommand(AddExercise);
 
-
             _ = InitializeExercisesAsync();
-        }
-
-        public void ReloadResults()
-        {
-            ResultsFromSelectedDate.Clear();
-
-            List<ExerciseResult> exerciseResultsFromSelectedDate = allExerciseResults.Where(r => r.Date == CurrentSelectedDate).ToList();
-
-            foreach (var item in exerciseResultsFromSelectedDate)
-                ResultsFromSelectedDate.Add(item);
         }
 
         private async Task InitializeExercisesAsync()
@@ -67,6 +45,23 @@ namespace GymStat.ViewModels
             allExerciseResults.Add(new(new("bench press", "bench-press.jpg"), DateOnly.FromDateTime(DateTime.Now)));
 
             ReloadResults();
+        }
+
+        private void ReloadResults()
+        {
+            ResultsFromSelectedDate.Clear();
+
+            List<ExerciseResult> exerciseResultsFromSelectedDate = allExerciseResults.Where(r => r.Date == CurrentSelectedDate).ToList();
+
+            foreach (var item in exerciseResultsFromSelectedDate)
+                ResultsFromSelectedDate.Add(item);
+        }
+
+        private void ChangeDateByDays(int days)
+        {
+            CurrentSelectedDate = CurrentSelectedDate.AddDays(days);
+            ReloadResults();
+            OnPropertyChanged(nameof(CurrentSelectedDate));
         }
 
         private void EditExercise(object? obj)
