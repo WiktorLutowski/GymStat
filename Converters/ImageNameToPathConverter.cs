@@ -19,9 +19,9 @@ namespace GymStat.Converters
                     image.BeginInit();
 
                     image.UriSource = new Uri(Path.GetFullPath(Path.Combine("Images", fileName)));
-                   
+
                     image.EndInit();
-                    
+
 
                     return image;
                 }

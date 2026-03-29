@@ -4,7 +4,10 @@ namespace GymStat.Commands
 {
     public class RelayCommand(Action<object?> execute, Func<object?, bool> canExecute = null!) : ICommand
     {
+        // Delegate executed when the command runs
         private readonly Action<object?> execute = execute;
+
+        // Optional predicate that determines whether the command can execute
         private readonly Func<object?, bool> canExecute = canExecute;
 
         public event EventHandler? CanExecuteChanged

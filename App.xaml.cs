@@ -5,7 +5,8 @@ using System.Windows;
 namespace GymStat
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Entry point for the WPF application. Initializes shared stores and the main view model
+    /// and shows the main window on startup.
     /// </summary>
     public partial class App : Application
     {

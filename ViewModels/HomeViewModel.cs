@@ -9,7 +9,14 @@ namespace GymStat.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Currently selected date in the home view. Changing this will update the displayed results.
+        /// </summary>
         public DateOnly CurrentSelectedDate { get; set; }
+
+        /// <summary>
+        /// Collection of exercise results that belong to the selected date. Bound to the UI.
+        /// </summary>
         public ObservableCollection<ExerciseResult> ResultsFromSelectedDate { get; set; }
 
         public RelayCommand NextDateCommand { get; set; }
@@ -18,8 +25,11 @@ namespace GymStat.ViewModels
         public RelayCommand EditExerciseCommand { get; set; }
         public RelayCommand AddExerciseCommand { get; set; }
 
+        // Services and stores
         private readonly ExerciseResultsService exerciseResultsService;
         private readonly NavigationStore navigationStore;
+
+        // All loaded results. Used to filter and present results for the selected date.
         private List<ExerciseResult> allExerciseResults;
 
         public HomeViewModel(NavigationStore navigationStore)
@@ -81,7 +91,7 @@ namespace GymStat.ViewModels
 
         private async void RemoveExercise(object? obj)
         {
-            if(obj is ExerciseResult exerciseResult)
+            if (obj is ExerciseResult exerciseResult)
             {
                 MessageBoxResult result = MessageBox.Show($"Czy napewno chcesz usunąc ćwiczenie: {exerciseResult.Exercise.ExerciseName}?", "Uwaga", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 

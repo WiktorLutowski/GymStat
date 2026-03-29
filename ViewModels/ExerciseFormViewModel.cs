@@ -9,10 +9,17 @@ namespace GymStat.ViewModels
 {
     public class ExerciseFormViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Available exercises to choose from. Populated from the exercises service.
+        /// </summary>
         public ObservableCollection<Exercise> Exercises { get; set; }
+
+        /// <summary>
+        /// List of sets (repetitions + weight) for the current exercise result being edited/added.
+        /// </summary>
         public ObservableCollection<Set> Sets { get; set; }
         public Exercise? SelectedExercise { get { return selectedExercise; } set { selectedExercise = value; OnPropertyChanged(); } }
-        
+
         private Exercise? selectedExercise;
 
         public RelayCommand AddSetCommand { get; set; }
@@ -20,11 +27,18 @@ namespace GymStat.ViewModels
         public RelayCommand BackCommand { get; set; }
         public RelayCommand RemoveSetCommand { get; set; }
 
+        // Services and state used by the form
         private readonly ExercisesService exercisesService;
         private readonly ExerciseResultsService exerciseResultsService;
         private readonly NavigationStore navigationStore;
+
+        // Task that completes when initial exercises are loaded. Used to wait in edit mode
         private readonly Task initTask;
+
+        // The date for which the result will be saved
         private readonly DateOnly exerciseDate;
+
+        // When editing an existing result, this stores the original for replacement
         private ExerciseResult? originalResult;
 
         public ExerciseFormViewModel(NavigationStore navigationStore, DateOnly exerciseDate)
