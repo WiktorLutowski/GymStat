@@ -16,6 +16,7 @@ UI mockups
 
 User stories
 - "As a user, I want to record sets for an exercise so that I can track my progress over time." 
+- "As a user, I want to see my personal records (max weight, best volume) for each exercise so that I can measure my strength improvements over time."
 
 ## 2. Technology Stack
 - Language: C# (recommended SDK: .NET 8)
